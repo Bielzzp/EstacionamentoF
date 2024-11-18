@@ -174,13 +174,13 @@ def controle_estacionamento():
 
                     if veiculo and veiculo[3] == 1:  # Se a contagem de visitas for 1, significa que é um novo cadastro
                         nome_cliente = input("Nome do cliente: ")
-
+                    
+                        # Garantir que o nome do cliente seja válido
+                        while not validar_texto(nome_cliente):
+                            print("Nome inválido. O nome deve conter apenas letras e espaços.")
+                            nome_cliente = input("Nome do cliente: ")
+                            
                         modelo_carro = input("Modelo do carro: ")
-
-                        # Garantir que o modelo seja válido
-                        while not validar_texto(modelo_carro):
-                            print("Modelo inválido. O modelo deve conter apenas letras e espaços.")
-                            modelo_carro = input("Modelo do carro: ")
 
                         cursor.execute("""
                             UPDATE veiculos SET nome_cliente = ?, modelo_carro = ? WHERE placa = ?
