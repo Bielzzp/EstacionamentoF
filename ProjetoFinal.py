@@ -129,12 +129,15 @@ def detectar_rosto():
                     bboxC = detection.location_data.relative_bounding_box
                      
                     # Obtém as dimensões da imagem capturada
-                    ih, iw, _ = imagem.shape
+                    height, width, _ = imagem.shape
                     
                     # Calcula as coordenadas x, y, largura (w) e altura (h) da caixa delimitadora
                      # A caixa delimitadora retornada pelo MediaPipe está normalizada (valores entre 0 e 1), por isso multiplicam   
                      # pelas dimensões da imagem para obter as coordenadas reais em pixels.
-                    x, y, w, h = int(bboxC.xmin * iw), int(bboxC.ymin * ih), int(bboxC.width * iw), int(bboxC.height * ih)
+                    x = int(bboxC.xmin * width)
+                    y = int(bboxC.ymin * height)
+                    w = int(bboxC.width * width)
+                    h = int(bboxC.height * height)
                     
                     # Desenhar a caixa de detecção no rosto
                     cv2.rectangle(imagem, (x, y), (x + w, y + h), (0, 255, 0), 2)
